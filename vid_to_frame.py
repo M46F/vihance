@@ -4,7 +4,6 @@ import cv2
 #example video https://www.youtube.com/watch?v=UdAwX8JB66E
 def main(file_path):
     vidcap = cv2.VideoCapture(file_path)
-    vidcap2 = cv2.VideoCapture(file_path)
     success,image = vidcap.read()
     count = 0
 
