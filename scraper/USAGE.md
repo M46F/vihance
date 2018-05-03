@@ -12,4 +12,4 @@ Ex:
 Car 10
 Gaming 100
 ```
-- call `make`, it will download the youtube video in docker container and bindmount it into your `~/videos` directory
+- call `make`, it will download the youtube videos(720p and 360p version for each video) in docker container and bindmount it into your `~/videos` directory
