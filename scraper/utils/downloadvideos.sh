@@ -37,7 +37,7 @@ else
 		do
 			if [ "$limit" -gt 0 ]; then
 				limit=$(($limit-1))
-				#$YTDL -f 22 "http://www.youtube.com/watch?v=$line" -o /videos/"$name%(title)s-%(id)s-720p.%(ext)s" 2>&1 | tee log.txt
+				$YTDL -f 22 "http://www.youtube.com/watch?v=$line" -o /videos/"$name%(title)s-%(id)s-720p.%(ext)s" 2>&1 | tee log.txt
 				$YTDL -f 18 "http://www.youtube.com/watch?v=$line" -o /videos/"$name%(title)s-%(id)s-360p.%(ext)s" 2>&1 | tee -a log.txt
 				error=$(grep -c ERROR log.txt)
 				if [ "$error" -gt 0 ]; then
