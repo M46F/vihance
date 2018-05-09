@@ -42,8 +42,8 @@ else
 				error=$(grep -c ERROR log.txt)
 				if [ "$error" -gt 0 ]; then
 					limit=$(($limit+1))
-					rm -f "http://www.youtube.com/watch?v=$line" -o /videos/"$name-%(title)s-%(id)s-720p.%(ext)s"
-					rm -f "http://www.youtube.com/watch?v=$line" -o /videos/"$name-%(title)s-%(id)s-360p.%(ext)s"
+					rm -f /videos/"$name-%(title)s-%(id)s-720p.%(ext)s"
+					rm -f /videos/"$name-%(title)s-%(id)s-360p.%(ext)s"
 				fi
 				rm -rf log.txt
 			else
