@@ -8,14 +8,16 @@ def extract(_id, file_path, target_path):
     print(_id, file_path, target_path)
     vidcap = cv2.VideoCapture(file_path)
     count = 0
-    fps = vidcap.get(cv2.CAP_PROP_FPS)
+    fps = int(vidcap.get(cv2.CAP_PROP_FPS))
+    print(fps)
     success, image = vidcap.read()
 #    print(success)
     while success:
         count += 1
-        target_write = "./{}{}_frame{}_{}.jpg".format(target_path, str(_id), str(count), target_path[:-1])
-        print(target_write)
-        cv2.imwrite(target_write, image)
+        if count%fps == 0:
+            target_write = "./{}{}_frame{}_{}.jpg".format(target_path, str(_id), str(count/fps), target_path[:-1])
+            print(target_write)
+            cv2.imwrite(target_write, image)
 #        print(count)
         success,image = vidcap.read()
 #    print(count)
