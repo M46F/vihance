@@ -1,23 +1,32 @@
 import cv2
+import os
+import sys
 
 
 #example video https://www.youtube.com/watch?v=UdAwX8JB66E
-def main(file_path):
+def extract(_id, file_path, target_path):
     vidcap = cv2.VideoCapture(file_path)
-    success,image = vidcap.read()
     count = 0
-
+    fps = vidcap.get(cv2.CAP_PROP_FPS)
+    success, image = vidcap.read()
+    print(success)
     while success:
-        cv2.imwrite("frame%d_original.jpg" % count, image)
-        resized = cv2.resize(image, (640, 360), interpolation = cv2.INTER_LINEAR)
-        cv2.imwrite("frame%d_360p.jpg" % count, resized)
-        success,image = vidcap.read()
         count += 1
-        if count%100 == 0:
-            lanjut = input("continue?(y/n)>")
-            if lanjut == 'n':
-                break
+        cv2.imwrite("./{}/{}_frame{}_{}.jpg".format(target_path, str(_id), str(count), target_path), image)
+        success,image = vidcap.read()
+#    print(count)
+
+def extract_folder(folder_dir):
+    ct = 0
+    for file in os.listdir(folder_dir):
+        filename = os.fsdecode(file)
+        if filename.endswith(".mp4"):
+            resolution = filename[-8:].split(".")[0]
+            print(resolution)
+            print(str(ct),filename,resolution)
+            ct += 1
+            extract(ct,'./' + folder_dir + '/' + filename,resolution)
 
 if __name__ == '__main__':
-    print("example (please download the video first or change file_path params)")
-    main("The Never-Ending Game of Dungeons & Dragons.mp4")
+    extract_folder(sys.argv[1])
+#    main("daydream.mkv")
