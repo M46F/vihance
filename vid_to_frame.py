@@ -1,7 +1,6 @@
 import cv2
 import os
 import sys
-from pprint import pprint
 import json
 
 
@@ -38,14 +37,13 @@ def extract_folder(folder_dir, dir_360p, dir_720p):
         #         extract(ct, './' + folder_dir + '/' + filename, dir_360p)
         #     elif resolution == '720p':
         #         extract(ct, './' + folder_dir + '/' + filename, dir_720p)
-    pprint(dict_of_vid)
     _id = 0
     for k in dict_of_vid:
         if len(dict_of_vid[k]['resolution']) < 2:
             print("skip", k)
             continue
         for res in dict_of_vid[k]['resolution']:
-            extract(_id, './' + folder_dir + '/' + filename, dir_dict[res])
+            extract(_id, './' + folder_dir + '/' + dict_of_vid[k][res], dir_dict[res])
         dict_of_vid[k].update({'id': _id})
         _id += 1
     with open('data.json', 'w') as fp:
