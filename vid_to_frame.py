@@ -43,7 +43,7 @@ def extract_folder(folder_dir, dir_360p, dir_720p):
             print("skip", k)
             continue
         for res in dict_of_vid[k]['resolution']:
-            extract(_id, './' + folder_dir + '/' + dict_of_vid[k][res], dir_dict[res])
+            extract(_id, './' + folder_dir + '/' + dict_of_vid[k]['resolution'][res], dir_dict[res])
         dict_of_vid[k].update({'id': _id})
         _id += 1
     with open('data.json', 'w') as fp:
