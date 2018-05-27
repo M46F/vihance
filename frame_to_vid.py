@@ -6,6 +6,7 @@ import collections
 ap = argparse.ArgumentParser()
 ap.add_argument("-o", "--output", required=False, default='out.mp4', help="output file")
 ap.add_argument("-d", "--dir", required=True, help="directory of frames")
+ap.add_argument("-f", "--fps", required=True, help="frame per second of the video")
 args = vars(ap.parse_args())
 
 dir = args['dir']
@@ -23,7 +24,7 @@ for f in os.listdir(dir):
     images.update({frame_num:f})
 
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter(args['output'], fourcc, 20.0, (w, h))
+out = cv2.VideoWriter(args['output'], fourcc, float(args['fps']), (w, h))
 
 for k in sorted(images):
     frame = cv2.imread(os.path.join(dir,images[k]))
